@@ -133,17 +133,22 @@ abstract class BaseRepository implements IRepository
 
     /**
      * @param $id
-     * @return mixed
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @throws RepositoryResourceFailedException
      */
     public function findById($id)
     {
         $this->query = $this->modelQuery()->where("id", "=", $id);
 
+        if (!$this->query->exists()) {
+            throw new RepositoryResourceFailedException("Resource was not found", 404);
+        }
+
         return $this->query->get();
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return $this
      */
     public function findByName(string $value)
