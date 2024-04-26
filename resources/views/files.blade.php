@@ -51,6 +51,9 @@
                 <div>
                     Оригинал: <a style="color: darkred" href="{{asset($item->upload_path)}}">{{$item->original_name}}.{{$item->extension}}</a>
                 </div>
+                <div>
+                    Zip: <a style="color: darkred" href="{{route("files.download", $item->name)}}.{{$item->extension}}">{{$item->name}}.zip </a>
+                </div>
             </div>
         @endforeach
     </body>
