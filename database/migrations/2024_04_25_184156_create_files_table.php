@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string("upload_path");
+            $table->string("original_name");
+//            $table->string("original_extension");
+            $table->string("extension");
+            $table->string("name", 255)->unique("name");
+           // i.e ALTER TABLE files ADD FULLTEXT  name(`name_idx`);
+            $table->fullText("name");
             $table->timestamps();
         });
     }
