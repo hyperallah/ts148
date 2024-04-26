@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers\Web\File;
 
+use App\Actions\File\UploadFileAction;
+use App\Exceptions\RepositoryResourceFailedException;
 use App\Http\Controllers\Web\WebController as BaseController;
+use App\Http\Requests\FileUploadRequest;
+use HttpResponse;
 
 class UploadFilesController extends BaseController
 {
-    public function __construct()
-    {
+    private UploadFileAction $uploadFileAction;
+    public function __construct(
+        UploadFileAction $uploadFileAction
+    ) {
+        $this->uploadFileAction = $uploadFileAction;
     }
 
-
-    public function __invoke()
+    /**
+     * @throws \Throwable
+     * @throws RepositoryResourceFailedException
+     */
+    public function __invoke(FileUploadRequest $request)
     {
-        return response("resource created", 201);
+        $this->uploadFileAction->run($request);
+
+        return response()
+            ->redirectToRoute('files.index')
+            ->with('success', 'Files has been uploaded');
     }
 }
