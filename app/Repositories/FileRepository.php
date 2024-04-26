@@ -2,24 +2,10 @@
 
 namespace App\Repositories;
 
-class FileRepository
+use App\Models\File;
+use App\Support\Repositories\BaseRepository;
+
+class FileRepository extends BaseRepository
 {
-    public function all()
-    {
-
-    }
-
-    public function create(array $data)
-    {
-
-    }
-
-    public function getById(string $id)
-    {
-
-    }
-    public function findByName(string $name)
-    {
-
-    }
+    protected $model = File::class;
 }
