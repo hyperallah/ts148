@@ -8,6 +8,6 @@ class CreateFileController extends BaseController
 {
     public function __invoke()
     {
-        return view("index");
+        return view("upload");
     }
 }
