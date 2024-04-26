@@ -9,7 +9,7 @@ class FindFileByIdRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'string|exists:files',
         ];
     }
 }
