@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\File\ListFilesController;
+use App\Http\Controllers\Api\File\FindFileByIdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('files', ListFilesController::class);
+    Route::get('files/{id}', FindFileByIdController::class);
 });
+

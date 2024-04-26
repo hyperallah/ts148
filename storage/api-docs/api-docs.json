@@ -1,0 +1,124 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "File api v1 documentation",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/files/{id}": {
+            "get": {
+                "tags": [
+                    "Files"
+                ],
+                "summary": "Get file by specified id",
+                "description": "Get file by specified id",
+                "operationId": "636775549325403cf6cf8724f8c4ec08",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response with file",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested file with provided id is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/files/": {
+            "get": {
+                "tags": [
+                    "Files"
+                ],
+                "summary": "Get list of files (with pagination by default)",
+                "description": "Get files",
+                "operationId": "8afc01278c7d63db6a79350abc65f787",
+                "parameters": [
+                    {
+                        "name": "sortDirection",
+                        "in": "query",
+                        "description": "Order by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "desc": {
+                                "summary": "by Descending",
+                                "value": "desc"
+                            },
+                            "asc": {
+                                "summary": "by Ascending",
+                                "value": "asc"
+                            }
+                        }
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "Sort by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "id": {
+                                "summary": "by id",
+                                "value": "id"
+                            },
+                            "name": {
+                                "summary": "by name",
+                                "value": "name"
+                            },
+                            "created_at": {
+                                "summary": "by creation date",
+                                "value": "created_at"
+                            }
+                        }
+                    },
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of files",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    }
+}
