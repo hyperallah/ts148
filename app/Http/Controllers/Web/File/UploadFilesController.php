@@ -6,7 +6,6 @@ use App\Actions\File\UploadFileAction;
 use App\Exceptions\RepositoryResourceFailedException;
 use App\Http\Controllers\Web\WebController as BaseController;
 use App\Http\Requests\FileUploadRequest;
-use HttpResponse;
 
 class UploadFilesController extends BaseController
 {
@@ -25,8 +24,7 @@ class UploadFilesController extends BaseController
     {
         $this->uploadFileAction->run($request);
 
-        return response()
-            ->redirectToRoute('files.index')
+        return redirect('files.index', 201)
             ->with('success', 'Files has been uploaded');
     }
 }
