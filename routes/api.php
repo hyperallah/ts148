@@ -19,6 +19,8 @@ use App\Http\Controllers\Api\File\FindFileByIdController;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('files', ListFilesController::class);
+    Route::get('files/{id}', FindFileByIdController::class);
+});
 
-Route::get('files', ListFilesController::class);
-Route::get('files/{id}', FindFileByIdController::class);
