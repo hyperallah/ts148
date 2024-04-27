@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\App;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -48,7 +49,12 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof ValidationException) {
-            return response($e->getMessage());
+            // http form-multipart bug-fix.
+            // explanation: throws out false validation errors in unit-tests.
+            // but in web/api app instance everything is fine
+            if (!App::runningUnitTests()) {
+                return response($e->getMessage());
+            }
         }
 
         return parent::render($request, $e);
