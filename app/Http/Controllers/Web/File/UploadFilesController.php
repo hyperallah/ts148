@@ -24,7 +24,7 @@ class UploadFilesController extends BaseController
     {
         $this->uploadFileAction->run($request);
 
-        return redirect('files.index', 201)
+        return redirect(route('files.index'), 201)
             ->with('success', 'Files has been uploaded');
     }
 }
