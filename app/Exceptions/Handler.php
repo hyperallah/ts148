@@ -47,6 +47,10 @@ class Handler extends ExceptionHandler
             }
         }
 
+        if ($e instanceof ValidationException) {
+            return response($e->getMessage());
+        }
+
         return parent::render($request, $e);
     }
 }
